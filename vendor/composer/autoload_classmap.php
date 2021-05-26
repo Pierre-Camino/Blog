@@ -29,7 +29,6 @@ return array(
     'App\\Repository\\CommentaireRepository' => $baseDir . '/src/Repository/CommentaireRepository.php',
     'App\\Repository\\UtilisateurRepository' => $baseDir . '/src/Repository/UtilisateurRepository.php',
     'App\\Security\\AppAuthenticator' => $baseDir . '/src/Security/AppAuthenticator.php',
-    'App\\Security\\EmailVerifier' => $baseDir . '/src/Security/EmailVerifier.php',
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
     'Collator' => $vendorDir . '/symfony/intl/Resources/stubs/Collator.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
