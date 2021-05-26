@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+	<h1 class="text-center mt-5">Liste des articles</h1>
+	<section class="container">
+		{% for article in articles %}
+			{% if article.statut == true %}
+				<article class="row border w-125 mt-5">
+					<aside class="col-6">
+						{% if app.user %}
+							<a href="{{ path('article', {id:article.id}) }}">
+								<h3 class="text-center font-weight-bold">
+									{{ article.titre }}
+								</h3>
+							</a>
+						{% else %}
+							<a href="{{ path('app_login')}}">
+								<h3 class="text-center font-weight-bold">
+									{{ article.titre }}
+								</h3>
+							</a>
+						{% endif %}
+						<h5>
+							Paru le :
+							{{ article.date | date('d/m/Y') }}
+							à
+							{{ article.date | date('H:i') }}
+						</h5>
+						<p>
+							{% if article.commentaires | length > 1 %}
+								{{ article.commentaires | length ~ " commentaires"}}
+							{% else %}
+								{{ article.commentaires | length ~ " commentaire"}}
+							{% endif %}
+						</p>
+						<p class="text-justify">
+							{{ article.contenu | raw }}
+						</p>
+					</aside>
+					<img class="col-6" src="{{ article.image }}" alt="image de l'article">
+				</article>
+			{% endif %}
+		{% endfor %}
+	</section>
+
+{% endblock %}

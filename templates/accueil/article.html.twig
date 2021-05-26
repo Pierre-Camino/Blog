@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<section class="container w-100">
+	<article class="row border text-justify mt-5">
+		<h2 class="text-center font-weight-bold">
+			<aside class="col-12 text-center">
+				{{ article.titre }}
+			</h2>
+			<div class="text-center">
+				<img class="col-6" src="{{ article.image }}" alt="image de l'article">
+			</div>
+			<h5 class="ml-3">
+				Paru le :
+				{{ article.date | date('d/m/Y') }}
+				à
+				{{ article.date | date('H:i') }}
+			</h5>
+		</aside>
+		<p class="text-center col-11 ml-5 mt-5">
+			{{ article.contenu | raw }}
+		</p>
+		{% if "ROLE_ADMIN" in app.user.getRoles() %}
+			<a class="text-right" href="{{ path('modifier', {id:article.id}) }}">Modifier</a>
+		{% endif %}
+</section>
+
+		<div class="row mt-5">
+			<aside class="col-6">
+				<h4 class="text-center">Ajouter un commentaire</h4>
+
+				{{ form_start(form, {'attr': {'class' : 'container'}})}}
+
+				{{ form_end(form)}}
+			</aside>
+			<aside class="col-5 ml-3">
+				<h3 class="font-italic font-weight-bold">Commentaires :</h3>
+				{% for commentaire in article.commentaires %}
+					<div class="border border-dark p-3 mt-3">
+						<h6 class="font-weight-bold">{{commentaire.titre}}</h6>
+						<p class="font-italic">{{"Publié le " ~ commentaire.date | date('d/m/Y') ~ " par " ~ commentaire.utilisateur}}</p>
+						<p>{{commentaire.contenu}}</p>
+					</div>
+				{% endfor %}
+			</aside>
+		</div>
+	</article>
+{% endblock %}
